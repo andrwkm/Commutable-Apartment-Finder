@@ -1,0 +1,6 @@
+flask
+selenium
+chromedriver-autoinstaller
+googlemaps
+pandas
+python-dotenv
