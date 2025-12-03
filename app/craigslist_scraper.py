@@ -7,7 +7,9 @@ import pandas as pd
 import time
 
 
-def setup_driver(headless=False):
+def setup_driver():
+
+    #Autoinstaller code snippet found from: https://stackoverflow.com/questions/67626049/how-to-add-chromedriver-to-my-github-repository
     chromedriver_autoinstaller.install()
     
     #Chrome driver options
@@ -15,9 +17,7 @@ def setup_driver(headless=False):
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument('--disable-dev-shm-usage')
-    
-    if headless:
-        chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--headless")
     chrome_options.add_experimental_option("detach", True)
 
     driver = webdriver.Chrome(options=chrome_options)
@@ -151,11 +151,11 @@ def extract_detailed_data(driver, urls):
     return address, area, title
 
 
-def scrape_craigslist(min_price=None, max_price=None, min_bedrooms=None, max_bedrooms=None, headless=True):
+def scrape_craigslist(min_price=None, max_price=None, min_bedrooms=None, max_bedrooms=None):
 
     base_url = "https://newyork.craigslist.org/search/apa#search=2~gallery~0"
     
-    driver = setup_driver(headless=headless)
+    driver = setup_driver()
     
     try:
         # Navigate to Craigslist
@@ -184,7 +184,7 @@ def scrape_craigslist(min_price=None, max_price=None, min_bedrooms=None, max_bed
         
         return df
         
-    finally:
+    finally: #stopping driver after scraping
         if driver:
             driver.quit()
 
@@ -208,7 +208,6 @@ if __name__ == "__main__":
         max_price=max_price,
         min_bedrooms=min_bedrooms,
         max_bedrooms=max_bedrooms,
-        headless=True
     )
     
     print("\nResults:")
