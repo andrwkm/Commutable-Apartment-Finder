@@ -1,0 +1,27 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "home" %}
+
+{% block content %}
+
+    <h1>Find your next apartment through Craigslist!</h1>
+
+    <p>For employment-focused individuals moving to NYC for the first time. Enter search criteria and preferences to find the best apartment for your needs.</p>
+
+    <!-- SEE: https://getbootstrap.com/docs/5.2/components/carousel/ -->
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?cs=srgb&dl=pexels-jvdm-1457842.jpg&fm=jpg" class="d-block w-100" alt="...">
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg" class="d-block w-100" alt="...">
+            </div>
+
+            <div class="carousel-item">
+                <img src="https://www.investopedia.com/thmb/yE5rQtJVTtUyaSh-1AOGB81_Uow=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/pennystocksinanira-187991635432447ea80546e1738584da.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
