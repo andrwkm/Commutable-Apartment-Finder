@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request
 
+from app.craigslist_scraper import scrape_craigslist
+
 search_routes = Blueprint("search_routes", __name__)
 
 @search_routes.route("/search/form")
@@ -36,6 +38,8 @@ def search_results():
     print(f"Cats Okay: {cats_okay}")
     dogs_okay = "dogs" in request.form
     print(f"Dogs Okay: {dogs_okay}")
+    furnished = "furnished" in request.form
+    print(f"Furnished: {furnished}")
     no_smoking = "no_smoking" in request.form
     print(f"No Smoking: {no_smoking}")
     wheelchair_accessible = "accessible" in request.form
@@ -60,4 +64,14 @@ def search_results():
     no_laundry = "no-laundry" in request.form
     print(f"No Laundry On Site: {no_laundry}")
 
-    return render_template("search_results.html")
+    results_df = scrape_craigslist(
+        search_term, 
+        min_price, max_price, 
+        min_bedrooms, max_bedrooms,
+        min_bathrooms, max_bathrooms, 
+        cats_okay=cats_okay, dogs_okay=dogs_okay, furnished=furnished, no_smoking=no_smoking, wheelchair_accessible=wheelchair_accessible, 
+        air_conditioning=air_conditioning, ev_charging=ev_charging, no_application_fee=no_application_fee, no_broker_fee=no_broker_fee, 
+        wd_in_unit=wd_in_unit, wd_hookup=wd_hookup, laundry_in_bldg=laundry_in_bldg, laundry_on_site=laundry_on_site, no_laundry=no_laundry)
+
+    results = results_df.to_dict('records')
+    return render_template("search_results.html", results=results)

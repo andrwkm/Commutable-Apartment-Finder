@@ -19,6 +19,8 @@ def setup_driver():
     chrome_options.add_argument('--disable-dev-shm-usage')
     chrome_options.add_argument("--headless")
     chrome_options.add_experimental_option("detach", True)
+    chrome_options.add_argument('--window-size=1920,1080')  #setting large enough size to ensure all interactions
+    chrome_options.add_argument('--start-maximized') 
 
     driver = webdriver.Chrome(options=chrome_options)
     
@@ -38,6 +40,7 @@ def switch_to_list_view(driver): #Switching to list view on Craigslist
         print("Could not switch to list view")
 
 def search_terms(driver, terms):
+    time.sleep(2)
     try:
         search_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, "//input[@enterkeyhint='search']"))
@@ -169,6 +172,7 @@ def apply_misc_filters(driver, cats_okay=False, dogs_okay=False, furnished=False
 
 def apply_laundry_filter(driver, wd_in_unit=False, wd_hookup=False, laundry_in_bldg=False, laundry_on_site=False, no_laundry=False):
     #if there is a true then click a button
+
     if not (wd_in_unit or wd_hookup or laundry_in_bldg or laundry_on_site or no_laundry):
         return
     
@@ -340,7 +344,8 @@ def scrape_craigslist(terms="",
                           cats_okay, dogs_okay, furnished, no_smoking, wheelchair_accessible, 
                           air_conditioning, ev_charging, no_application_fee, no_broker_fee, 
                           wd_in_unit, wd_hookup, laundry_in_bldg, laundry_on_site, no_laundry)
-
+        
+    
         # Extract preview data
         urls, prices, bedrooms = extract_preview_data(driver)
         
@@ -357,16 +362,19 @@ def scrape_craigslist(terms="",
             "Price": prices
         })
         
-        return df
+        print(df)
 
+        return df
+    
     finally: #stopping driver after scraping
         if driver:
-           driver.quit()
+            driver.quit()
+
 
 
 if __name__ == "__main__":
     # TEST THE SCRAPER
-    
+
     input_terms = input("Enter search terms (or leave blank): ")
 
     input_min_price = input("Enter minimum price (or leave blank): ")
@@ -410,7 +418,6 @@ if __name__ == "__main__":
                            cats_okay=cats_okay, dogs_okay=dogs_okay, furnished=furnished, no_smoking=no_smoking, wheelchair_accessible=wheelchair_accessible,
                            air_conditioning=air_conditioning, ev_charging=ev_charging, no_application_fee=no_application_fee, no_broker_fee=no_broker_fee,
                            wd_in_unit=wd_in_unit, wd_hookup=wd_hookup, laundry_in_bldg=laundry_in_bldg, laundry_on_site=laundry_on_site, no_laundry=no_laundry)
-
 
     print("\nResults:")
     print(df.head())
