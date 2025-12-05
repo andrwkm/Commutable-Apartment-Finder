@@ -1,0 +1,163 @@
+{% extends "bootstrap_5_layout.html" %}
+{% set active_page = "search_form" %}
+
+{% block content %}
+
+    <h1>Search for Craigslist Listings Near Your Office</h1>
+    <p>Office address and commute details are all required!</p>
+
+    <div class ="my-3"></div>
+
+    <form method="POST" action="/search/results">
+        <div class="input-group input-group-lg">
+            <span class="input-group-text" id="inputGroup-sizing-lg">Office Address</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" name="office" placeholder="Enter your office address here" value="">
+        </div>
+
+        <div class="my-3"></div>
+
+        <select class="form-select" name="transport" id="transport" aria-label="Transportation plan select">
+            <option selected>Specify Transportation Plan</option>
+            <option value="walking">Walking</option>
+            <option value="biking">Biking</option>
+            <option value="transit">Transit</option>
+            <option value="driving">Driving</option>
+        </select>
+        <div class="my-3"></div>
+        <div class="input-group">
+            <input type="text" class="form-control" aria-label="commuteTime" name="commuteTime" placeholder="Maximum Commute Time">
+            <span class="input-group-text">minutes</span>
+        </div>
+
+        <div class="my-3"></div>
+        <h2>Search Criteria for Craigslist Listings:</h2>
+
+
+        <div class="mb-3">
+            <label for="search_query" class="form-label">General Search</label>
+            <input type="text" class="form-control" id="search_query" name="search_query" placeholder="Enter search terms" value="">
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-text">Monthly Rent</span>
+            <input type="number" aria-label="Minimum" class="form-control" placeholder="Minimum" name="minRent" value="">
+            <input type="number" aria-label="Maximum" class="form-control" placeholder="Maximum" name="maxRent" value="">
+        </div>
+
+        <div class="my-3"></div>
+
+        <div class="input-group">
+            <span class="input-group-text">Beds</span>
+            <input type="number" aria-label="Minimum" class="form-control" placeholder="Minimum" name="minBeds" value="">
+            <input type="number" aria-label="Maximum" class="form-control" placeholder="Maximum" name="maxBeds" value="">
+        </div>
+
+        <div class="my-3"></div>
+
+        <div class="input-group">
+            <span class="input-group-text">Bathrooms</span>
+            <input type="number" aria-label="Minimum" class="form-control" placeholder="Minimum" name="minBaths" value="">
+            <input type="number" aria-label="Maximum" class="form-control" placeholder="Maximum" name="maxBaths" value="">
+        </div>
+
+        <div class="my-3"></div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="cats">
+            <label class="form-check-label" for="flexCheckDefault">
+                cats ok
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="dogs">
+            <label class="form-check-label" for="flexCheckDefault">
+                dogs ok
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="furnished">
+            <label class="form-check-label" for="flexCheckDefault">
+                furnished
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="noSmoking">
+            <label class="form-check-label" for="flexCheckDefault">
+                no smoking
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="accessible">
+            <label class="form-check-label" for="flexCheckDefault">
+                wheelchair accessible
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="air-conditioning">
+            <label class="form-check-label" for="flexCheckDefault">
+                air conditioning
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="EV-charging">
+            <label class="form-check-label" for="flexCheckDefault">
+                EV charging
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="no-application-fee">
+            <label class="form-check-label" for="flexCheckDefault">
+                no application fee
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="no-broker-fee">
+            <label class="form-check-label" for="flexCheckDefault">
+                no broker fee
+            </label>
+        </div>
+
+        <div class="my-3"></div>
+
+        <div class="mb-3">
+            <label for="search_query" class="form-label">Laundry</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="unit">
+            <label class="form-check-label" for="flexCheckDefault">
+                w/d in unit
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="hookups">
+            <label class="form-check-label" for="flexCheckDefault">
+                w/d hookups
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="building">
+            <label class="form-check-label" for="flexCheckDefault">
+                laundry in building
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="site">
+            <label class="form-check-label" for="flexCheckDefault">
+                laundry on site
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="no-laundry">
+            <label class="form-check-label" for="flexCheckDefault">
+                no laundry on site
+            </label>
+        </div>
+
+        <div class="my-3"></div>
+
+
+        <button type="submit" class="btn btn-primary">Search Listings</button>
+
+    </form>
+
+{% endblock %}
