@@ -23,6 +23,8 @@ def setup_driver():
     chrome_options.add_argument('--start-maximized') 
 
     driver = webdriver.Chrome(options=chrome_options)
+
+    print("WebDriver setup complete")
     
     return driver
 
