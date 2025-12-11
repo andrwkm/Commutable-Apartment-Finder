@@ -4,3 +4,6 @@ chromedriver-autoinstaller
 googlemaps
 pandas
 python-dotenv
+
+pytest
+gunicorn
