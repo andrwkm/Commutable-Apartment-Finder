@@ -278,8 +278,12 @@ def extract_detailed_data(driver, urls):
     address = []
     area = []
     title = []
+    total_listings = len(urls)
+    counter = 0
     
     for target in urls:
+        counter += 1
+        print(f"Scraping data from listing {counter} of {total_listings}")
         driver.get(target) #navigate to each listing
         time.sleep(.5)
         try:
