@@ -46,8 +46,8 @@ def calculate_commute_time(origin, destination, mode="transit"):
 def add_commute_times(df, destination, mode="transit"):
     df = df.copy()
     
-    commute_durations = []
-    commute_duration_minutes = []
+    commute_durations = [] #list holding string formatted durations
+    commute_duration_minutes = [] #list holding float durations in minutes
     commute_distances = []
     
     for idx, row in df.iterrows(): #going through each row of inputted df
