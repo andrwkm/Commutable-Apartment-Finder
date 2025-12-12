@@ -46,8 +46,8 @@ def calculate_commute_time(origin, destination, mode="transit"):
 def add_commute_times(df, destination, mode="transit"):
     df = df.copy()
     
-    commute_durations = []
-    commute_duration_minutes = []
+    commute_durations = [] #list holding string formatted durations
+    commute_duration_minutes = [] #list holding float durations in minutes
     commute_distances = []
     
     for idx, row in df.iterrows(): #going through each row of inputted df
@@ -81,15 +81,52 @@ def add_commute_times(df, destination, mode="transit"):
 
 if __name__ == "__main__":
     
-    df = pd.DataFrame({
-            "URL": ["example 1", "example 2"],
-            "Title": ["Test1", "Test2"],
-            "Address": ["270 Greenwich St, New York, NY 10007", ""],
-            "Area": ["West Village", "185 Greenwich St Suite LL2365, New York, NY 10007"],
-            "Bedrooms": [2, 1],
-            "Price": [3000, 2500]
+    choice = input("Would you like to run a commute time test? (y/n): ").lower()
+    if choice == 'y':
+        number_of_addresses = int(input("Enter number of test addresses to input: "))
+
+        test_urls = []
+        addresses = []
+        areas = []
+        titles = []
+        bedrooms = []
+        prices = []
+
+        for i in range(number_of_addresses):
+            
+
+            url = f"URL {i+1}"
+            Title = f"Listing {i+1}"
+            address = input(f"Enter address {i+1} (leave blank if none): ")
+            area = input(f"Enter area {i+1}): ")
+            bedrooms = int(input(f"Enter number of bedrooms for listing {i+1}: "))
+            price = int(input(f"Enter price for listing {i+1}: "))
+
+            test_urls.append(url)
+            titles.append(Title)
+            addresses.append(address)
+            areas.append(area)
+            bedrooms.append(bedrooms)
+            prices.append(price)
+
+        df = pd.DataFrame({
+            "URL": test_urls,
+            "Title": titles,
+            "Address": addresses,
+            "Area": areas,
+            "Bedrooms": bedrooms,
+            "Price": prices
         })
-    
+    else:
+        df = pd.DataFrame({
+                "URL": ["example 1", "example 2"],
+                "Title": ["Test1", "Test2"],
+                "Address": ["270 Greenwich St, New York, NY 10007", ""],
+                "Area": ["West Village", "185 Greenwich St Suite LL2365, New York, NY 10007"],
+                "Bedrooms": [2, 1],
+                "Price": [3000, 2500]
+            })
+        
     print(df[['URL', 'Area', 'Address']])
     
     DESTINATION_ADDRESS = input("Enter your work address or office: ")

@@ -23,6 +23,8 @@ def setup_driver():
     chrome_options.add_argument('--start-maximized') 
     
     driver = webdriver.Chrome(options=chrome_options)
+
+    print("WebDriver setup complete")
     
     return driver
 
@@ -278,8 +280,12 @@ def extract_detailed_data(driver, urls):
     address = []
     area = []
     title = []
+    total_listings = len(urls)
+    counter = 0
     
     for target in urls:
+        counter += 1
+        print(f"Scraping data from listing {counter} of {total_listings}")
         driver.get(target) #navigate to each listing
         time.sleep(.5)
         try:
