@@ -11,7 +11,7 @@ def setup_driver():
 
     #Autoinstaller code snippet found from: https://stackoverflow.com/questions/67626049/how-to-add-chromedriver-to-my-github-repository
     chromedriver_autoinstaller.install()
-    
+
     #Chrome driver options
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--no-sandbox')
@@ -21,7 +21,7 @@ def setup_driver():
     chrome_options.add_experimental_option("detach", True)
     chrome_options.add_argument('--window-size=1920,1080')  #setting large enough size to ensure all interactions
     chrome_options.add_argument('--start-maximized') 
-
+    
     driver = webdriver.Chrome(options=chrome_options)
 
     print("WebDriver setup complete")
