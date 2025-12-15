@@ -21,6 +21,8 @@
                         <th>Area</th>
                         <th>Bedrooms</th>
                         <th>Price</th>
+                        <th>Commute Time (minutes)</th>
+                        <th>Distance</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +34,8 @@
                             <td>{{ listing['Area'] }}</td>
                             <td>{{ listing['Bedrooms'] }}</td>
                             <td>{{ listing['Price'] }}</td>
+                            <td>{{ listing['Commute_Minutes'] }}</td>
+                            <td>{{ listing['Commute_Distance'] }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>

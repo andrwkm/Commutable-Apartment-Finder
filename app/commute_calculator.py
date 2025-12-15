@@ -72,9 +72,9 @@ def add_commute_times(df, destination, mode="transit"):
             commute_distances.append(None)
             
 
-    df[f'Commute_Time_{mode}'] = commute_durations
-    df[f'Commute_Minutes_{mode}'] = commute_duration_minutes
-    df[f'Commute_Distance_{mode}'] = commute_distances
+    df['Commute_Time'] = commute_durations
+    df['Commute_Minutes'] = commute_duration_minutes
+    df['Commute_Distance'] = commute_distances
     
     return df
 

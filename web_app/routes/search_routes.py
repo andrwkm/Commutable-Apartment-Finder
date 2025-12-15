@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 
 from app.craigslist_scraper import scrape_craigslist
+from app.commute_calculator import add_commute_times
 
 search_routes = Blueprint("search_routes", __name__)
 
@@ -72,6 +73,23 @@ def search_results():
         cats_okay=cats_okay, dogs_okay=dogs_okay, furnished=furnished, no_smoking=no_smoking, wheelchair_accessible=wheelchair_accessible, 
         air_conditioning=air_conditioning, ev_charging=ev_charging, no_application_fee=no_application_fee, no_broker_fee=no_broker_fee, 
         wd_in_unit=wd_in_unit, wd_hookup=wd_hookup, laundry_in_bldg=laundry_in_bldg, laundry_on_site=laundry_on_site, no_laundry=no_laundry)
+    
+    office_address = request.form.get("office") or ""
+    commute_mode = request.form.get("transport") or "walking"
+    max_commute_time = int(request.form.get("commuteTime") or 0)
+    
+    edited_results = add_commute_times(results_df, destination=office_address, mode=commute_mode)
 
-    results = results_df.to_dict('records')
+    print("Calculated Commute Times")
+
+
+    if max_commute_time is not None:
+        print("Filter by commute time")
+        edited_results = edited_results[edited_results['Commute_Minutes'] <= max_commute_time]
+
+    #rounding commute minutes for easier reading
+    edited_results['Commute_Minutes'] = edited_results['Commute_Minutes'].round(2)
+
+    #final results to dict
+    results = edited_results.to_dict('records')
     return render_template("search_results.html", results=results)

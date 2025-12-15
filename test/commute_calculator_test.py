@@ -34,8 +34,8 @@ def test_add_commute_times():
 
 
     
-    assert 'Commute_Time_walking' in result_df.columns #checking if new column added with specified mode
+    assert 'Commute_Time' in result_df.columns #checking if new column added with specified mode
     assert len(result_df) == len(df) #checking if lengths match
     
-    for commute_time in result_df['Commute_Time_walking']: 
+    for commute_time in result_df['Commute_Time']: 
         assert isinstance(commute_time, (str, type(None))) #each index should be string or None
