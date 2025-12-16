@@ -8,22 +8,35 @@ import time
 
 
 def setup_driver():
-    # Docker container has Chrome pre-installed
     chrome_options = webdriver.ChromeOptions()
+    
+    # Essential arguments for Docker/Railway
     chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument("--disable-infobars")
     chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome_options.add_argument("--headless")
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
-    chrome_options.add_experimental_option("detach", True)
+    
+    # Memory optimization arguments
+    chrome_options.add_argument('--disable-software-rasterizer')
+    chrome_options.add_argument('--disable-extensions')
+    chrome_options.add_argument('--disable-infobars')
     chrome_options.add_argument('--window-size=1920,1080')
     chrome_options.add_argument('--start-maximized')
+    chrome_options.add_argument('--single-process')  # Use single process to save memory
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--disable-blink-features=AutomationControlled')
     
+    # Reduce memory footprint
+    chrome_options.add_argument('--disable-logging')
+    chrome_options.add_argument('--log-level=3')
+    chrome_options.add_argument('--disable-background-networking')
+    
+    # Set page load timeout
     driver = webdriver.Chrome(options=chrome_options)
+    driver.set_page_load_timeout(30)  # 30 second timeout per page
     
     print("WebDriver setup complete")
     return driver
-
 
 def switch_to_list_view(driver): #Switching to list view on Craigslist
     try:

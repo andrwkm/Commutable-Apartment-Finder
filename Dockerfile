@@ -26,6 +26,10 @@ EXPOSE 8080
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
+# Add your non-sensitive environment variables here
+# ENV FLASK_ENV=production
+# ENV LOG_LEVEL=info
 
 # Run Flask app with gunicorn using application factory
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--timeout", "600", "--workers", "1", "web_app:create_app()"]
+# Increased timeout to 10 minutes, graceful timeout for Chrome cleanup
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--timeout", "600", "--graceful-timeout", "120", "--workers", "1", "--threads", "1", "web_app:create_app()"]
