@@ -1,6 +1,7 @@
 # Commutable-Apartment-Finder
-Application that finds the perfect NYC apartment listings based on user inputs and commute preferences. 
+Application that finds the perfect NYC apartment listings based on user inputs and commute preferences.
 
+While there is a deployed web service, this is best performed when cloned and run LOCALLY.
 ## Setup
 
 Clone the repo to download it from Github.
